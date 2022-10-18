@@ -19,7 +19,8 @@ channel = "jhondybala"
 tkn = "ydaesb2hz9pb19dxvgf3qbyotuc1nc"
 useragent = random.choice(open("UserAgents.txt", "r").read().splitlines())
 refererOrigin = random.choice(open("Referers.txt", "r").read().splitlines())
-
+# channel_id need to be called yet
+channel_id = "36233625"
 
 payloads = {
         # This list of payloads is not being used yet.
@@ -110,15 +111,16 @@ def start(channel, runCount):
     for i in range(runCount):
         try:
             try:
+                # Definitions
+                # Proxies
+                proxy = random.choice(open("proxy.txt", "r").read().splitlines())
+                proxies = {"https": f"http://{proxy}"}
+
                 # Create the session
                 sss = requests.Session()                
                 sss.headers = get_Headers()
                 sss.proxies = proxies
 
-                # Definitions
-                # proxies
-                proxy = random.choice(open("proxy.txt", "r").read().splitlines())
-                proxies = {"https": f"http://{proxy}"}
                 # Callbacks                
                 playback = get_Playback(sss)
                 sig, token = playback["Signature"], playback["Token"]
@@ -137,6 +139,6 @@ def start(channel, runCount):
         except Exception as e:
             print("exception: " + str(e))
 
-channel_id = get_Id(channel)
+#channel_id = get_Id(channel)
 
-start(channel)
+start(channel,2)
